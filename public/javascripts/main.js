@@ -77,6 +77,20 @@
         }
     });
 
+    function queryResults(query) {
+        let id = button.getAttribute("value")
+        $.ajax({
+            url: `http://localhost:8080/properties/${id}`,
+            type: 'PUT',
+            data: {
+                state: value
+            },
+            success: function () {
+                changeRowState(button)
+            }
+        });
+    }
+
     function initMap() {
         const pageNum = $("body").data("current-page")
         const state = $("body").data("current-state")

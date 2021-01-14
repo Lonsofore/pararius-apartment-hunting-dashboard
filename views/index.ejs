@@ -29,6 +29,7 @@
 <% var minPage=(pagination.page-paginationButtonsCount <= 1 ? 1:pagination.page-paginationButtonsCount) %>
 <% var maxPage=(pagination.page+paginationButtonsCount >= pagination.pages ? pagination.pages:pagination.page+paginationButtonsCount) %>
 
+<!-- Search for apartment - https://dustinpfister.github.io/2017/09/14/lodash-find/ -->
 <body data-current-state="<%= pagination.state%>">
 	<div class="center">
 		<img class="header_image" src="/images/icons/pararius.png" />
@@ -46,13 +47,21 @@
 						<a href="/hidden" class="<%= pagination.state=='hidden'? 'active' : '' %>">Hidden</a>
 						<a href="/all" class="<%= pagination.state=='all'? 'active' : '' %>">All</a>
 					</div>
-					<div class="pagination">
+						<!--SEARCH-->
+						<div class="search-bar">
+							<div class="search-input">
+								<input type="text" onchange="queryResults(this.val())" placeholder="Look up for smth">
+								<a href="#" class="search-cancel">
+									<i class="fa fa-times" aria-hidden="true"></i>
+								</a>
+							</div>
+						</div>
+						<!--END OF SEARCH-->
+					<% if(pagination.pages>1){ %>
+					<div class="pagination" style="float: right;">
 						<div class="counter"><%= pagination.total %> Properties</div>
 						<a href="/<%= pagination.state%>/page-<%= pagination.page %>" class="active">List</a>
 						<a href="/map/<%= pagination.state%>/page-<%= pagination.page %>">Map</a>
-					</div>
-					<% if(pagination.pages>1){ %>
-					<div class="pagination" style="float: right;">
 						<% if(pagination.page>1){ %>
 						<a href="./page-<%= pagination.page-1 %>">&laquo;</a>
 						<% } %>
@@ -73,6 +82,11 @@
 					</div>
 					<% } else { %>
 					<div class="row header">
+						<!--
+						<div class="cell">
+							Appearance
+						</div>
+						-->
 						<div class="cell">
 							Property
 						</div>
@@ -86,23 +100,29 @@
 							Bedrooms
 						</div>
 						<div class="cell">
-							Furniture
+							Discovery Date
 						</div>
 						<div class="cell">
 							Neighborhood
 						</div>
-						<div class="cell">
+						<!--<div class="cell">
 							Distance
 						</div>
 						<div class="cell">
 							Commute
 						</div>
+						-->
 						<div class="cell">
 							Controls
 						</div>
 					</div>
 					<% for (var i = 0; i < properties.length; i++) { %>
 					<div class="row" id="<%= properties[i].id %>">
+						<!--
+						<div class="cell" data-title="Appearance">
+							<img src="<%= properties[i].imgSvg %>">
+						</div>
+						-->
 						<div class="cell" data-title="Property">
 							<a target="_blank" href="<%= properties[i].url %>">
 								<%= properties[i].name %>
@@ -123,11 +143,12 @@
 							<%= properties[i].bedrooms %>
 						</div>
 						<div class="cell" data-title="Furniture">
-							<%= properties[i].furniture %>
+							<%= properties[i].discoveryDate %>
 						</div>
 						<div class="cell" data-title="Neighborhood">
 							<%= properties[i].neighborhood %>
 						</div>
+						<!--
 						<div class="cell" data-title="Distance">
 							<a target="_blank" href="<%= properties[i].locationUrl %>">
 								<%= (properties[i].distance/1000).toFixed(1) %> Km
@@ -138,6 +159,7 @@
 								<%= Math.floor(properties[i].duration / 60) %>m
 							</a>
 						</div>
+						-->
 						<div class="cell" data-title="Controls">
 							<i class="material-icons" id="notes-icon"
 								title="<%= properties[i].notes && properties[i].notes.length>0 ? properties[i].notes : 'Add notes'%>"

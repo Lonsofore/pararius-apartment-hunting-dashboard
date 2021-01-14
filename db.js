@@ -12,7 +12,10 @@ if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
-const adapter = new FileSync('./db/db.json')
+//const adapter = new FileSync('./db/db.json')
+//const adapter = new FileSync('./db/dbEindhovenFlatmate.json')
+//const adapter = new FileSync('./db/dbEindh40km.json')
+const adapter = new FileSync('./db/dbEindh10km.json') // Flatmate bike distance Bart
 const db = low(adapter)
 
 db.defaults({
@@ -67,21 +70,21 @@ module.exports = class Db extends EventEmitter {
     getProperties(state) {
         switch (state) {
             case "all":
-                return db.get('properties').value();
+                return db.get('properties').orderBy(['discoveryDate'], ['desc']).value();
             case "new":
-                return db.get('properties').filter(p => p.state == "new").value();
+                return db.get('properties').filter(p => p.state == "new").orderBy( ['discoveryDate'], ['desc']).value();
             case "hidden":
-                return db.get('properties').filter(p => p.state == "hidden").value();
+                return db.get('properties').filter(p => p.state == "hidden").orderBy(  ['discoveryDate'], ['desc']).value();
             case "interesting":
-                return db.get('properties').filter(p => p.state == "interesting").value();
+                return db.get('properties').filter(p => p.state == "interesting").orderBy(  ['discoveryDate'], ['desc']).value();
             case "shortlisted":
-                return db.get('properties').filter(p => p.state == "shortlisted").value();
+                return db.get('properties').filter(p => p.state == "shortlisted").orderBy(  ['discoveryDate'], ['desc']).value();
             case "not_available":
-                return db.get('properties').filter(p => p.state == "not_available").value();
+                return db.get('properties').filter(p => p.state == "not_available").orderBy(  ['discoveryDate'], ['desc']).value();
             case "visible":
-                return db.get('properties').filter(p => p.state != "hidden").value();
+                return db.get('properties').filter(p => p.state != "hidden").orderBy(  ['discoveryDate'], ['desc']).value();
             default:
-                return db.get('properties').value();
+                return db.get('properties').orderBy(  ['discoveryDate'], ['desc']).value();
         }
     }
 
