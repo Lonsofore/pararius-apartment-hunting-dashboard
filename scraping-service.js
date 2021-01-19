@@ -4,6 +4,8 @@ const EventEmitter = require("events");
 
 const axios = require("axios");
 const cheerio = require("cheerio");
+const request = require("request");
+const got = require("got");
 const throttledQueue = require('throttled-queue');
 
 const config = require("./config");
@@ -46,8 +48,8 @@ module.exports = class ScrapingService extends EventEmitter {
     let self = this;
     var promise = new Promise(function (resolve, reject) {
       throttle(() => {
-        axios.get(self.url + pageNumber).then(function (result) {
-            resolve(cheerio.load(result.data));
+        got(self.url + pageNumber).then(function (result) {
+            resolve(cheerio.load(result.body));
           })
           .catch(function (error) {
             reject(error);
@@ -114,11 +116,11 @@ module.exports = class ScrapingService extends EventEmitter {
 
   _scrap($) {
     let self = this;
-    $("ul.search-list li.search-list__item--listing").each((_, element) => {
+    $("ul.search-list li.search-list__item--listing").each((index , element) => {
       let url = "https://www.pararius.com" + $(".listing-search-item__title > a", element).attr("href").trim()
       let urlSplit = url.split('/')
       let id = urlSplit[urlSplit.length - 2]
-      let price = parseInt($(".listing-search-item__price", element).clone().children().remove().end().text().replace(/[€,]+/g, '').trim())
+      let price = parseInt($(".listing-search-item__price", element).text().replace(/[€,]+/g, '').trim())
       let name = $(".listing-search-item__title", element).text().replace(/\s\s+/g, ' ').trim()
       let imgSvg = $('.picture--listing-search-item img', element).attr('src');
       let locationInfo = $(".listing-search-item__location", element).clone().children().remove().end().text().trim();
