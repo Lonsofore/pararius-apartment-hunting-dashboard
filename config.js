@@ -30,7 +30,7 @@ config.googleApisMaxRequestPerSecond = 10
 
 // Very important to calculate distance, coordinates, and displaying maps in the dashboard.
 // These APIs have to be enabled on https://console.developers.google.com/: Geocoding API, Maps JavaScript API, and Distance Matrix API
-config.googleApi = "AIzaSyDnLbRVvKlKe9173U3yMMjHuWuAdRzjeo0"
+config.googleApi = "GOOGLE_API"
 
 // Where to serve the app
 config.port = 8080
