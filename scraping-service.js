@@ -4,7 +4,6 @@ const EventEmitter = require("events");
 
 const axios = require("axios");
 const cheerio = require("cheerio");
-const request = require("request");
 const got = require("got");
 const throttledQueue = require('throttled-queue');
 
