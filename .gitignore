@@ -105,3 +105,4 @@ dist
 
 # App
 db/
+config.js
