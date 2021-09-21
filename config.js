@@ -1,17 +1,13 @@
 let config = {};
 
 // We will parse the listings from this URL, open it in your browser first, adjust the filters and make sure it is in the list mode not the maps.
-//config.url = "https://www.pararius.com/apartments/eindhoven/0-1200/radius-25/furnished/25m2";
-//config.url = "https://www.pararius.com/apartments/eindhoven/1250-1750/radius-25/3-rooms/furnished/50m2";
-//config.url = "https://www.pararius.com/apartments/utrecht/0-1750/radius-10/3-rooms/furnished/50m2";
-//config.url = "https://www.pararius.com/apartments/eindhoven/0-1750/radius-40/3-rooms/furnished"; // Flatmate 40km around Eindhoven
-config.url = "https://www.pararius.com/apartments/eindhoven/0-1750/radius-10/3-rooms/furnished/"; // Flatmate bike distance Bart
+config.url = "https://www.pararius.com/apartments/amsterdam/1000-1600/2-rooms/1-bedrooms/furnished/25m2/balcony";
 
 // Frequency of scraping and updates from Pararius in minutes. (Minimum: 15)
 config.updateFrequency = 60;
 
 // Used to calculate distance and commute time, can be any string. Please try it on Google maps first.
-config.commuteAddress = "Vestdijk 51, Eindhoven"
+config.commuteAddress = "Pedro de Medinalaan 5, 1086 XK Amsterdam"
 
 // Used to calculate distance and commute time to commuteAddress. It can be: driving, walking, bicycling or transit. (transit calculate it as if you are commuting now)
 config.commuteMode = "bicycling";
@@ -34,5 +30,8 @@ config.googleApi = "GOOGLE_API"
 
 // Where to serve the app
 config.port = 8080
+
+// File name to save the database
+config.dbName = "db.json"
 
 module.exports = config;

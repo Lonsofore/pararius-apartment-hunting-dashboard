@@ -1,0 +1,9 @@
+version: '2'
+services:
+    pararius:
+        build: .
+        volumes:
+            - ./config.js:/opt/config.js
+            - ./db:/opt/db
+        ports:
+            - 8080:8080

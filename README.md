@@ -31,6 +31,8 @@ Still to come if I have time:
 
 In order for this app to work and show you maps, commute time, and distance, you need an API key from Google. You can get it for free after logging-in and enabling billing [here](https://console.cloud.google.com/google/maps-apis/overview). You should enable these three APIs for the key: Geocoding API, Maps JavaScript API, and Distance Matrix API.
 
+You also have to enable billing for your project [here](https://console.cloud.google.com/billing/linkedaccount).
+
 You can then place the key in the config file. (See below)
 
 ## Configuration
@@ -68,6 +70,9 @@ config.googleApi = "GOOGLE_API_KEY"
 
 // Where to serve the app
 config.port = 8080
+
+// File name to save the database
+config.dbName = "db.json"
 ```
 
 ## Building And Running

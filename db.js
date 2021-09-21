@@ -5,6 +5,8 @@ const EventEmitter = require("events");
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 
+const config = require("./config");
+
 var fs = require('fs');
 var dir = './db';
 
@@ -12,10 +14,7 @@ if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
-//const adapter = new FileSync('./db/db.json')
-//const adapter = new FileSync('./db/dbEindhovenFlatmate.json')
-//const adapter = new FileSync('./db/dbEindh40km.json')
-const adapter = new FileSync('./db/dbEindh10km.json') // Flatmate bike distance Bart
+const adapter = new FileSync('./db/' + config.dbName)
 const db = low(adapter)
 
 db.defaults({
